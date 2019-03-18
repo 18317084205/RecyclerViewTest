@@ -11,4 +11,4 @@
     android:textSize="14sp"
     tools:text="Aardvark"
     android:background="@drawable/white_touch"
-    tools:context=".MainActivity"/>
+    tools:context=".SideBarActivity"/>

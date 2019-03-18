@@ -1,7 +1,6 @@
 package com.liang.widget.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.liang.ItemTouchListener;
 
@@ -76,5 +75,7 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
         return items.size();
     }
 
-
+    public ArrayList<T> getItems() {
+        return items;
+    }
 }

@@ -43,14 +43,11 @@ public class DecorationHelper {
 
 
     public boolean hasNewDecoration(int position, boolean isReverseLayout) {
-        Log.e(TAG, "hasNewDecoration  position: "+ position);
         if (indexOutOfBounds(position)) {
             return false;
         }
 
         long decorationId = mAdapter.getDecorationId(position);
-        Log.e(TAG, "hasNewDecoration  decorationId: "+ decorationId);
-
         if (decorationId < 0) {
             return false;
         }
@@ -61,8 +58,6 @@ public class DecorationHelper {
             nextItemDecorationId = mAdapter.getDecorationId(nextItemPosition);
         }
         int firstItemPosition = isReverseLayout ? mAdapter.getItemCount() - 1 : 0;
-        Log.e(TAG, "hasNewDecoration  firstItemPosition: "+ firstItemPosition);
-
         return position == firstItemPosition || decorationId != nextItemDecorationId;
     }
 
