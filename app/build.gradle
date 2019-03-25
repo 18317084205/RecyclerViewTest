@@ -25,6 +25,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.liang.jtab:jtablayout:1.2.0'
+    implementation 'com.liang.widget:sidebar:1.0.6'
     implementation project(':recyclerviewhelper')
-    implementation 'com.liang.jtab:jtablayout:1.1.7'
+    implementation project(':refreshlayoutlibrary')
 }
