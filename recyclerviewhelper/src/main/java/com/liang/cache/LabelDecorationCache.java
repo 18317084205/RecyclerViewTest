@@ -6,27 +6,27 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.liang.IDecorationAdapter;
 import com.liang.util.LayoutManagerHelper;
-import com.liang.widget.adapter.LabelBaseAdapter;
 
 public class LabelDecorationCache implements DecorationProvider {
 
-    private final LabelBaseAdapter mAdapter;
+    private final IDecorationAdapter mIDecorationAdapter;
     private final LongSparseArray<View> mDecorations = new LongSparseArray<>();
 
-    public LabelDecorationCache(LabelBaseAdapter adapter) {
-        mAdapter = adapter;
+    public LabelDecorationCache(IDecorationAdapter iDecorationAdapter) {
+        mIDecorationAdapter = iDecorationAdapter;
     }
 
     @Override
     public View getDecoration(RecyclerView parent, int position) {
-        long decorationId = mAdapter.getDecorationId(position);
+        long decorationId = mIDecorationAdapter.getDecorationId(position);
 
         View decoration = mDecorations.get(decorationId);
         if (decoration == null) {
-            RecyclerView.ViewHolder viewHolder = mAdapter.onCreateDecorationHolder(parent,
-                    mAdapter.getDecorationType(position));
-            mAdapter.onBindDecorationHolder(viewHolder, position);
+            RecyclerView.ViewHolder viewHolder = mIDecorationAdapter.onCreateDecorationHolder(parent,
+                    mIDecorationAdapter.getDecorationType(position));
+            mIDecorationAdapter.onBindDecorationHolder(viewHolder, position);
             decoration = viewHolder.itemView;
             if (decoration.getLayoutParams() == null) {
                 decoration.setLayoutParams(new ViewGroup.LayoutParams(

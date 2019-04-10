@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.liang.widget.adapter.LabelBaseAdapter;
+import com.liang.widget.adapter.LabelRecyclerAdapter;
 
 import java.security.SecureRandom;
 
-public class MyAdapter extends LabelBaseAdapter<String, RecyclerView.ViewHolder> {
+public class MyAdapter extends LabelRecyclerAdapter<String, RecyclerView.ViewHolder> {
     public MyAdapter(RecyclerView recyclerView) {
         super(recyclerView);
     }

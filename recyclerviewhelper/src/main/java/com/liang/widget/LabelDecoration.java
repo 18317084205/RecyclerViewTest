@@ -8,26 +8,26 @@ import android.util.SparseArray;
 import android.view.View;
 
 import com.liang.BaseItemDecoration;
+import com.liang.IDecorationAdapter;
 import com.liang.cache.LabelDecorationCache;
 import com.liang.cache.DecorationProvider;
 import com.liang.util.DecorationHelper;
 import com.liang.util.DecorationRenderer;
 import com.liang.util.DimensionHelper;
-import com.liang.widget.adapter.LabelBaseAdapter;
 
 public class LabelDecoration extends BaseItemDecoration {
     protected static final String TAG = "LabelDecoration";
-    protected final LabelBaseAdapter mAdapter;
+    protected final IDecorationAdapter mIDecorationAdapter;
     protected final SparseArray<Rect> mDecorationBounds = new SparseArray<>();
     protected final DecorationProvider mDecorationProvider;
     protected final DecorationHelper mDecorationHelper;
     protected final Rect mTempRect = new Rect();
 
-    public LabelDecoration(LabelBaseAdapter adapter) {
-        mAdapter = adapter;
-        mDecorationProvider = new LabelDecorationCache(adapter);
-        mDecorationHelper = new DecorationHelper(adapter, mDecorationProvider);
-        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+    public LabelDecoration(IDecorationAdapter iDecorationAdapter) {
+        mIDecorationAdapter = iDecorationAdapter;
+        mDecorationProvider = new LabelDecorationCache(mIDecorationAdapter);
+        mDecorationHelper = new DecorationHelper(mIDecorationAdapter, mDecorationProvider);
+        mIDecorationAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {
                 invalidateDecorations();
@@ -62,7 +62,7 @@ public class LabelDecoration extends BaseItemDecoration {
         super.onDraw(canvas, parent, state);
 
         final int childCount = parent.getChildCount();
-        if (childCount <= 0 || mAdapter.getItemCount() <= 0) {
+        if (childCount <= 0 || mIDecorationAdapter.getItemCount() <= 0) {
             return;
         }
 

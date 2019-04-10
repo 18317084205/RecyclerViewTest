@@ -1,25 +1,24 @@
 package com.liang.widget.adapter;
 
+import android.databinding.ObservableArrayList;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 
 import com.liang.ItemTouchListener;
+import com.liang.widget.listener.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
-    private ArrayList<T> items = new ArrayList<>();
+    private ObservableArrayList<T> items;
     private RecyclerView mRecyclerView;
 
-
-    public interface OnItemClickListener<T> {
-        void onItemClick(T item, int position);
-    }
-
-    public BaseAdapter(RecyclerView recyclerView) {
+    public BaseAdapter(@NonNull RecyclerView recyclerView) {
         this.mRecyclerView = recyclerView;
-        setHasStableIds(true);
+        items = new ObservableArrayList<>();
+        this.setHasStableIds(true);
     }
 
     public RecyclerView getParent() {
@@ -30,20 +29,19 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
         mRecyclerView.addOnItemTouchListener(new ItemTouchListener(mRecyclerView.getContext(), onItemClickListener));
     }
 
+
+
     public void add(T object) {
         items.add(object);
-        notifyDataSetChanged();
     }
 
     public void add(int index, T object) {
         items.add(index, object);
-        notifyDataSetChanged();
     }
 
     public void addAll(Collection<T> collection) {
         if (collection != null) {
             items.addAll(collection);
-            notifyDataSetChanged();
         }
     }
 
@@ -53,12 +51,10 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
 
     public void clear() {
         items.clear();
-        notifyDataSetChanged();
     }
 
     public void remove(String object) {
         items.remove(object);
-        notifyDataSetChanged();
     }
 
     public T getItem(int position) {
@@ -75,7 +71,12 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
         return items.size();
     }
 
-    public ArrayList<T> getItems() {
+    public ObservableArrayList<T> getItems() {
         return items;
     }
+
+    protected void resetItems(ObservableArrayList<T> sender) {
+        this.items = sender;
+    }
+
 }

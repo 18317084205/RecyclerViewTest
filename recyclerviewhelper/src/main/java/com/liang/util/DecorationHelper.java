@@ -3,27 +3,24 @@ package com.liang.util;
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.liang.IDecorationAdapter;
 import com.liang.cache.DecorationProvider;
-import com.liang.widget.adapter.LabelBaseAdapter;
-
-import static android.content.ContentValues.TAG;
 
 public class DecorationHelper {
 
-    private final LabelBaseAdapter mAdapter;
+    private final IDecorationAdapter mIDecorationAdapter;
     private final DecorationProvider mDecorationProvider;
 
 
     private final Rect mTempRect1 = new Rect();
     private final Rect mTempRect2 = new Rect();
 
-    public DecorationHelper(LabelBaseAdapter adapter, DecorationProvider decorationProvider) {
-        this.mAdapter = adapter;
+    public DecorationHelper(IDecorationAdapter iDecorationAdapter, DecorationProvider decorationProvider) {
+        this.mIDecorationAdapter = iDecorationAdapter;
         this.mDecorationProvider = decorationProvider;
     }
 
@@ -38,7 +35,7 @@ public class DecorationHelper {
             margin = mTempRect1.left;
         }
 
-        return offset <= margin && mAdapter.getDecorationId(position) >= 0;
+        return offset <= margin && mIDecorationAdapter.getDecorationId(position) >= 0;
     }
 
 
@@ -47,7 +44,7 @@ public class DecorationHelper {
             return false;
         }
 
-        long decorationId = mAdapter.getDecorationId(position);
+        long decorationId = mIDecorationAdapter.getDecorationId(position);
         if (decorationId < 0) {
             return false;
         }
@@ -55,14 +52,14 @@ public class DecorationHelper {
         long nextItemDecorationId = -1;
         int nextItemPosition = position + (isReverseLayout ? 1 : -1);
         if (!indexOutOfBounds(nextItemPosition)) {
-            nextItemDecorationId = mAdapter.getDecorationId(nextItemPosition);
+            nextItemDecorationId = mIDecorationAdapter.getDecorationId(nextItemPosition);
         }
-        int firstItemPosition = isReverseLayout ? mAdapter.getItemCount() - 1 : 0;
+        int firstItemPosition = isReverseLayout ? mIDecorationAdapter.getItemCount() - 1 : 0;
         return position == firstItemPosition || decorationId != nextItemDecorationId;
     }
 
     private boolean indexOutOfBounds(int position) {
-        return position < 0 || position >= mAdapter.getItemCount();
+        return position < 0 || position >= mIDecorationAdapter.getItemCount();
     }
 
     public void initDefaultLabelBounds(Rect bounds, RecyclerView recyclerView, View decoration, View firstView, boolean firstDecoration) {

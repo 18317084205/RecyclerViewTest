@@ -3,16 +3,16 @@ package com.liang.widget.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.liang.DecorationAdapterInterface;
+import com.liang.IDecorationAdapter;
 import com.liang.LabelTouchListener;
 import com.liang.widget.LabelDecoration;
 
-public abstract class LabelBaseAdapter<T, VH extends RecyclerView.ViewHolder>
-        extends BaseAdapter<T, VH> implements DecorationAdapterInterface<VH> {
+public abstract class LabelRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
+        extends RecyclerViewAdapter<T, VH> implements IDecorationAdapter<VH> {
 
     private OnLabelClickListener mLabelClickListener;
 
-    public LabelBaseAdapter(RecyclerView recyclerView) {
+    public LabelRecyclerAdapter(RecyclerView recyclerView) {
         super(recyclerView);
     }
 

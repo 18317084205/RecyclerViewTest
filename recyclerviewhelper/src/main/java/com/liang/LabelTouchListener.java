@@ -7,13 +7,13 @@ import android.view.SoundEffectConstants;
 import android.view.View;
 
 import com.liang.widget.LabelDecoration;
-import com.liang.widget.adapter.LabelBaseAdapter;
+import com.liang.widget.adapter.LabelRecyclerAdapter;
 
 public class LabelTouchListener implements RecyclerView.OnItemTouchListener {
     private final GestureDetector mTapDetector;
     private final RecyclerView mRecyclerView;
     private final LabelDecoration mLabelDecoration;
-    private LabelBaseAdapter.OnLabelClickListener mOnLabelClickListener;
+    private LabelRecyclerAdapter.OnLabelClickListener mOnLabelClickListener;
 
     public LabelTouchListener(final RecyclerView recyclerView, final LabelDecoration labelDecoration) {
         mTapDetector = new GestureDetector(recyclerView.getContext(), new SingleTapDetector());
@@ -22,13 +22,13 @@ public class LabelTouchListener implements RecyclerView.OnItemTouchListener {
         mOnLabelClickListener = getAdapter().getOnLabelClickListener();
     }
 
-    public LabelBaseAdapter getAdapter() {
-        if (mRecyclerView.getAdapter() instanceof LabelBaseAdapter) {
-            return (LabelBaseAdapter) mRecyclerView.getAdapter();
+    public LabelRecyclerAdapter getAdapter() {
+        if (mRecyclerView.getAdapter() instanceof LabelRecyclerAdapter) {
+            return (LabelRecyclerAdapter) mRecyclerView.getAdapter();
         } else {
             throw new IllegalStateException("A RecyclerView with " +
                     LabelTouchListener.class.getSimpleName() +
-                    " requires a " + LabelBaseAdapter.class.getSimpleName());
+                    " requires a " + LabelRecyclerAdapter.class.getSimpleName());
         }
     }
 

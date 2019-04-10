@@ -9,11 +9,11 @@ import com.liang.side.Side;
 
 import java.util.LinkedHashSet;
 
-public abstract class RelateSideAdapter<T> extends LabelRecyclerAdapter<T, RecyclerView.ViewHolder> {
+public abstract class DataBindingRelateSideAdapter<T> extends DataBindingLabelAdapter<T> {
 
     private Side mSide;
 
-    public RelateSideAdapter(RecyclerView recyclerView, @NonNull Side side) {
+    public DataBindingRelateSideAdapter(RecyclerView recyclerView, @NonNull Side side) {
         super(recyclerView);
         mSide = side;
         bindSideBarListener();

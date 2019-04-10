@@ -5,13 +5,13 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.liang.IDecorationAdapter;
 import com.liang.util.DecorationRenderer;
-import com.liang.widget.adapter.LabelBaseAdapter;
 
 public class FloatingLabelDecoration extends LabelDecoration {
 
-    public FloatingLabelDecoration(LabelBaseAdapter adapter) {
-        super(adapter);
+    public FloatingLabelDecoration(IDecorationAdapter iDecorationAdapter) {
+        super(iDecorationAdapter);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class FloatingLabelDecoration extends LabelDecoration {
     @Override
     public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
         final int childCount = parent.getChildCount();
-        if (childCount <= 0 || mAdapter.getItemCount() <= 0) {
+        if (childCount <= 0 || mIDecorationAdapter.getItemCount() <= 0) {
             return;
         }
 

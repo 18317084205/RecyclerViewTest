@@ -15,6 +15,7 @@ import com.liang.side.Side;
 import com.liang.widget.FloatingLabelDecoration;
 import com.liang.widget.LinearDividerDecoration;
 import com.liang.widget.adapter.BaseAdapter;
+import com.liang.widget.listener.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -95,7 +96,7 @@ public class SideTabLeftActivity extends AppCompatActivity implements Side {
     }
 
 
-    private class ContentOnItemClickListener implements BaseAdapter.OnItemClickListener<SortModel> {
+    private class ContentOnItemClickListener implements OnItemClickListener<SortModel> {
 
         @Override
         public void onItemClick(SortModel item, int position) {
@@ -104,7 +105,7 @@ public class SideTabLeftActivity extends AppCompatActivity implements Side {
         }
     }
 
-    private class TabOnItemClickListener implements BaseAdapter.OnItemClickListener<String> {
+    private class TabOnItemClickListener implements OnItemClickListener<String> {
 
         @Override
         public void onItemClick(String item, int position) {

@@ -1,8 +1,10 @@
 package com.liang.recyclerviewtest;
 
+import android.databinding.ViewDataBinding;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +12,13 @@ import android.widget.TextView;
 
 
 import com.liang.recyclerviewtest.bean.SortModel;
+import com.liang.recyclerviewtest.databinding.ItemCountryListBindingBinding;
+import com.liang.recyclerviewtest.databinding.ViewHeaderBindingBinding;
 import com.liang.recyclerviewtest.utils.CharacterParser;
 import com.liang.recyclerviewtest.utils.PinyinComparator;
 import com.liang.side.Side;
 import com.liang.widget.SideBar;
+import com.liang.widget.adapter.DataBindingRelateSideAdapter;
 import com.liang.widget.adapter.RelateSideAdapter;
 
 import java.security.SecureRandom;
@@ -21,7 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 
-public class CountryAdapter extends RelateSideAdapter<SortModel> {
+public class CountryAdapter extends DataBindingRelateSideAdapter<SortModel> {
 
     private PinyinComparator mPinyinComparator;
 
@@ -77,22 +82,11 @@ public class CountryAdapter extends RelateSideAdapter<SortModel> {
         }
 
         Collections.sort(getItems(), mPinyinComparator);
-        notifyDataSetChanged();
-    }
-
-    @NonNull
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_country_list, parent, false);
-        return new CountryViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        CountryViewHolder viewHolder = (CountryViewHolder) holder;
-        viewHolder.countryName.setText(getItem(position).getName());
-        viewHolder.countryCode.setText("+" + getItem(position).getData());
+    protected int getItemLayout(int viewType) {
+        return R.layout.item_country_list_binding;
     }
 
     @Override
@@ -106,18 +100,25 @@ public class CountryAdapter extends RelateSideAdapter<SortModel> {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateDecorationHolder(ViewGroup parent, int decorationType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.view_header, parent, false);
-        return new RecyclerView.ViewHolder(view) {
-        };
+    protected int getItemDecorationLayout(int decorationType) {
+        return R.layout.view_header_binding;
     }
 
     @Override
-    public void onBindDecorationHolder(RecyclerView.ViewHolder holder, int position) {
-        TextView textView = (TextView) holder.itemView;
-        textView.setText(getItem(position).getSortLetters());
-        holder.itemView.setBackgroundColor(getRandomColor());
+    protected void onBindDecorationHolder(ViewDataBinding viewDataBinding, SortModel item) {
+        if (viewDataBinding instanceof ViewHeaderBindingBinding) {
+            ((ViewHeaderBindingBinding) viewDataBinding).setModel(item);
+            viewDataBinding.getRoot().setBackgroundColor(getRandomColor());
+            viewDataBinding.executePendingBindings();
+        }
+    }
+
+    @Override
+    protected void onBindViewHolder(ViewDataBinding viewDataBinding, SortModel item) {
+        if (viewDataBinding instanceof ItemCountryListBindingBinding) {
+            ((ItemCountryListBindingBinding) viewDataBinding).setModel(item);
+            viewDataBinding.executePendingBindings();
+        }
     }
 
     private int getRandomColor() {
@@ -145,15 +146,4 @@ public class CountryAdapter extends RelateSideAdapter<SortModel> {
         getSide().setChecked(getItem(position).getSortLetters());
     }
 
-    class CountryViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView countryName;
-        public TextView countryCode;
-
-        public CountryViewHolder(View itemView) {
-            super(itemView);
-            countryName = itemView.findViewById(R.id.countryName);
-            countryCode = itemView.findViewById(R.id.countryCode);
-        }
-    }
 }

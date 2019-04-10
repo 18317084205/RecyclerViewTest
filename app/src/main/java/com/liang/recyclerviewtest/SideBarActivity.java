@@ -17,14 +17,14 @@ import com.liang.widget.LabelDecoration;
 import com.liang.widget.FloatingLabelDecoration;
 import com.liang.widget.LinearDividerDecoration;
 import com.liang.widget.SideBar;
-import com.liang.widget.adapter.BaseAdapter;
-import com.liang.widget.adapter.LabelBaseAdapter;
+import com.liang.widget.adapter.LabelRecyclerAdapter;
+import com.liang.widget.listener.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SideBarActivity extends AppCompatActivity implements BaseAdapter.OnItemClickListener<SortModel>
-        , LabelBaseAdapter.OnLabelClickListener, SideBar.OnTextDialogListener {
+public class SideBarActivity extends AppCompatActivity implements OnItemClickListener<SortModel>
+        , LabelRecyclerAdapter.OnLabelClickListener, SideBar.OnTextDialogListener {
 
     private RecyclerView recyclerView;
     private CountryAdapter adapter;
