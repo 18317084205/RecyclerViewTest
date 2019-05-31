@@ -91,7 +91,7 @@ public class CountryAdapter extends DataBindingRelateSideAdapter<SortModel> {
 
     @Override
     public long getDecorationId(int position) {
-        return 0;
+        return getItem(position).getSortLetters().charAt(0);
     }
 
     @Override
