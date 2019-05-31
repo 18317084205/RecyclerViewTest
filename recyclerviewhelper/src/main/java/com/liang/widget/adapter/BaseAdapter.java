@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import com.liang.ItemTouchListener;
 import com.liang.widget.listener.OnItemClickListener;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -28,8 +27,6 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
     public void setOnItemClickListener(OnItemClickListener<T> onItemClickListener) {
         mRecyclerView.addOnItemTouchListener(new ItemTouchListener(mRecyclerView.getContext(), onItemClickListener));
     }
-
-
 
     public void add(T object) {
         items.add(object);
@@ -55,6 +52,13 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
 
     public void remove(String object) {
         items.remove(object);
+    }
+
+    public void reset(Collection<T> collection) {
+        clear();
+        if (collection != null) {
+            items.addAll(collection);
+        }
     }
 
     public T getItem(int position) {

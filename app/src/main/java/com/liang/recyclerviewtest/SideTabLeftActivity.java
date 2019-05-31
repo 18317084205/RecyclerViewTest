@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.liang.listener.OnSideCheckedListener;
@@ -38,7 +39,22 @@ public class SideTabLeftActivity extends AppCompatActivity implements Side {
         initTabView();
         initContentView();
     }
-
+    public void onClick(View v) {
+        String[] country = getResources().getStringArray(R.array.country);
+        String[] countryCode = getResources().getStringArray(R.array.country_code);
+        List<SortModel> dataList = new ArrayList<>();
+        if (country.length != countryCode.length) {
+            finish();
+            return;
+        }
+        for (int i = 0; i < country.length; i++) {
+            SortModel sortModel = new SortModel();
+            sortModel.setName(country[i]);
+            sortModel.setData(countryCode[i]);
+            dataList.add(sortModel);
+        }
+        adapter.reset(dataList);
+    }
     private void initTabView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         tabView.setLayoutManager(layoutManager);
@@ -87,7 +103,7 @@ public class SideTabLeftActivity extends AppCompatActivity implements Side {
     public void setChecked(String tag) {
         int position = tabAdapter.getItems().indexOf(tag);
         tabAdapter.setCheckedPosition(position);
-        tabView.smoothScrollToPosition(position);
+//        tabView.smoothScrollToPosition(position);
     }
 
     @Override

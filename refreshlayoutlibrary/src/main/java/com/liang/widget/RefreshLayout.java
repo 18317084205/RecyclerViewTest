@@ -692,7 +692,7 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent,
 
     private void moveSpinner(float overScrollTop) {
         float slingshotDist = mSpinnerOffsetEnd;
-        float originalDragPercent = overScrollTop / (slingshotDist * 2);
+        float originalDragPercent = overScrollTop / (slingshotDist * 3);
         float dragPercent = Math.min(1f, Math.abs(originalDragPercent));
         float extraOS = Math.abs(overScrollTop) - slingshotDist;
         float tensionSlingshotPercent = Math.max(0, Math.min(extraOS, slingshotDist * 2)
@@ -740,12 +740,12 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent,
     private void finishSpinner(int offset) {
         ensureScrollAnimator();
         mFrom = mCurrentTargetOffsetTop;
-        if (mRefreshEnabled && offset / 2 > mTotalDragDistance) {
+        if (mRefreshEnabled && offset / 3 > mTotalDragDistance) {
             mRefreshing = true;
             mScrollAnimator.setFloatValues(mCurrentTargetOffsetTop, mTotalDragDistance);
             mScrollAnimator.addListener(mRefreshListener);
             mScrollAnimator.start();
-        } else if (mLoadEnabled && offset / 2 < -mTotalDragDistance) {
+        } else if (mLoadEnabled && offset / 3 < -mTotalDragDistance) {
             mLoading = true;
             mScrollAnimator.setFloatValues(mCurrentTargetOffsetTop, -mTotalDragDistance);
             mScrollAnimator.addListener(mLoadListener);

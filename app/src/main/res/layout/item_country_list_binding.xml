@@ -9,12 +9,21 @@
         <variable
             name="model"
             type="com.liang.recyclerviewtest.bean.SortModel" />
+
+        <variable
+            name="onItemClickListener"
+            type="com.liang.widget.listener.OnItemClickListener" />
+
+        <variable
+            name="position"
+            type="Integer" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_touch">
+        android:background="@drawable/white_touch"
+        android:onClick="@{()->onItemClickListener.onItemClick(model,position)}">
 
         <TextView
             android:id="@+id/countryName"

@@ -91,7 +91,7 @@ public class CountryAdapter extends DataBindingRelateSideAdapter<SortModel> {
 
     @Override
     public long getDecorationId(int position) {
-        return getItem(position).getSortLetters().charAt(0);
+        return 0;
     }
 
     @Override
@@ -114,9 +114,11 @@ public class CountryAdapter extends DataBindingRelateSideAdapter<SortModel> {
     }
 
     @Override
-    protected void onBindViewHolder(ViewDataBinding viewDataBinding, SortModel item) {
+    protected void onBindViewHolder(ViewDataBinding viewDataBinding, SortModel item, int position) {
         if (viewDataBinding instanceof ItemCountryListBindingBinding) {
             ((ItemCountryListBindingBinding) viewDataBinding).setModel(item);
+            ((ItemCountryListBindingBinding) viewDataBinding).setPosition(position);
+            ((ItemCountryListBindingBinding) viewDataBinding).setOnItemClickListener(getOnItemClickListener());
             viewDataBinding.executePendingBindings();
         }
     }

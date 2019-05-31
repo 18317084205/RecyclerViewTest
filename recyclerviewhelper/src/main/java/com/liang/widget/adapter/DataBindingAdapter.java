@@ -6,21 +6,38 @@ import android.databinding.ObservableList;
 import android.databinding.ViewDataBinding;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.liang.widget.holder.DataBindingViewHolder;
+import com.liang.widget.listener.OnItemClickListener;
 
 /*
  * 参考http://www.cnblogs.com/DoNetCoder/p/7243878.html?utm_source=tuicool&utm_medium=referral
  * */
-public abstract class DataBindingAdapter<T> extends BaseAdapter<T,DataBindingViewHolder> {
+public abstract class DataBindingAdapter<T> extends BaseAdapter<T, DataBindingViewHolder> {
 
     private ItemsChangedCallback itemsChangeCallback;
+    private OnItemClickListener<T> onItemClickListener = new OnItemClickListener<T>() {
+        @Override
+        public void onItemClick(T item, int position) {
+
+        }
+    };
 
     public DataBindingAdapter(@NonNull RecyclerView recyclerView) {
         super(recyclerView);
         this.itemsChangeCallback = new ItemsChangedCallback();
+    }
+
+    @Override
+    public void setOnItemClickListener(OnItemClickListener<T> onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public OnItemClickListener<T> getOnItemClickListener() {
+        return onItemClickListener;
     }
 
     @NonNull
@@ -34,10 +51,11 @@ public abstract class DataBindingAdapter<T> extends BaseAdapter<T,DataBindingVie
 
     @Override
     public final void onBindViewHolder(@NonNull DataBindingViewHolder holder, int position) {
-        onBindViewHolder(DataBindingUtil.getBinding(holder.itemView), getItem(position));
+        ViewDataBinding viewDataBinding = DataBindingUtil.getBinding(holder.itemView);
+        onBindViewHolder(viewDataBinding, getItem(position), position);
     }
 
-    protected abstract void onBindViewHolder(ViewDataBinding viewDataBinding, T item);
+    protected abstract void onBindViewHolder(ViewDataBinding viewDataBinding, T item, int position);
 
 
     @Override
@@ -93,7 +111,11 @@ public abstract class DataBindingAdapter<T> extends BaseAdapter<T,DataBindingVie
 
     private void onItemRangeInserted(ObservableArrayList<T> sender, int positionStart, int itemCount) {
         resetItems(sender);
-        notifyItemRangeInserted(positionStart, itemCount);
+        if (positionStart == 0 && sender.size() == itemCount) {
+            onChanged(sender);
+        } else {
+            notifyItemRangeInserted(positionStart, itemCount);
+        }
     }
 
     private void onItemRangeMoved(ObservableArrayList<T> sender) {
