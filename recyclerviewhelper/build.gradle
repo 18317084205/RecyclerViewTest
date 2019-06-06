@@ -6,8 +6,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 6
-        versionName "1.0.6"
+        versionCode 9
+        versionName "1.0.9"
     }
 
     buildTypes {
@@ -17,7 +17,7 @@ android {
         }
     }
 
-    dataBinding{
+    dataBinding {
         enabled true
     }
 
@@ -25,8 +25,8 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    compileOnly 'com.android.support:appcompat-v7:27.1.1'
+    compileOnly 'com.android.support:recyclerview-v7:27.1.1'
 }
 
 apply from: "bintrayUpload.gradle"

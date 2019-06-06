@@ -8,10 +8,13 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.liang.widget.holder.DataBindingViewHolder;
 import com.liang.widget.listener.OnItemClickListener;
+
+import java.util.logging.Logger;
 
 /*
  * 参考http://www.cnblogs.com/DoNetCoder/p/7243878.html?utm_source=tuicool&utm_medium=referral
@@ -43,11 +46,22 @@ public abstract class DataBindingAdapter<T> extends BaseAdapter<T, DataBindingVi
     @NonNull
     @Override
     public final DataBindingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewDataBinding viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), getItemLayout(viewType), parent, false);
-        return new DataBindingViewHolder(viewDataBinding.getRoot());
+        View view = onCreateView(parent, viewType);
+        if (view == null) {
+            ViewDataBinding viewDataBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), getItemLayout(viewType), parent, false);
+            view = viewDataBinding.getRoot();
+        }
+        return new DataBindingViewHolder(view);
     }
 
-    protected abstract int getItemLayout(int viewType);
+    protected View onCreateView(@NonNull ViewGroup parent, int viewType) {
+        return null;
+    }
+
+
+    protected int getItemLayout(int viewType) {
+        return 0;
+    }
 
     @Override
     public final void onBindViewHolder(@NonNull DataBindingViewHolder holder, int position) {
@@ -74,57 +88,48 @@ public abstract class DataBindingAdapter<T> extends BaseAdapter<T, DataBindingVi
 
         @Override
         public void onChanged(ObservableArrayList<T> sender) {
-            DataBindingAdapter.this.onChanged(sender);
+            DataBindingAdapter.this.onChanged();
         }
 
         @Override
         public void onItemRangeChanged(ObservableArrayList<T> sender, int positionStart, int itemCount) {
-            DataBindingAdapter.this.onItemRangeChanged(sender, positionStart, itemCount);
+            DataBindingAdapter.this.onItemRangeChanged(positionStart, itemCount);
         }
 
         @Override
         public void onItemRangeInserted(ObservableArrayList<T> sender, int positionStart, int itemCount) {
-            DataBindingAdapter.this.onItemRangeInserted(sender, positionStart, itemCount);
+            DataBindingAdapter.this.onItemRangeInserted(positionStart, itemCount);
         }
 
         @Override
         public void onItemRangeMoved(ObservableArrayList<T> sender, int fromPosition, int toPosition, int itemCount) {
-            DataBindingAdapter.this.onItemRangeMoved(sender);
+            DataBindingAdapter.this.onItemRangeMoved();
         }
 
         @Override
         public void onItemRangeRemoved(ObservableArrayList<T> sender, int positionStart, int itemCount) {
-            DataBindingAdapter.this.onItemRangeRemoved(sender, positionStart, itemCount);
+            DataBindingAdapter.this.onItemRangeRemoved(positionStart, itemCount);
         }
     }
 
-    private void onChanged(ObservableArrayList<T> sender) {
-        resetItems(sender);
+    private void onChanged() {
         notifyDataSetChanged();
     }
 
 
-    private void onItemRangeChanged(ObservableArrayList<T> sender, int positionStart, int itemCount) {
-        resetItems(sender);
+    private void onItemRangeChanged(int positionStart, int itemCount) {
         notifyItemRangeChanged(positionStart, itemCount);
     }
 
-    private void onItemRangeInserted(ObservableArrayList<T> sender, int positionStart, int itemCount) {
-        resetItems(sender);
-        if (positionStart == 0 && sender.size() == itemCount) {
-            onChanged(sender);
-        } else {
-            notifyItemRangeInserted(positionStart, itemCount);
-        }
+    private void onItemRangeInserted(int positionStart, int itemCount) {
+        notifyItemRangeInserted(positionStart, itemCount);
     }
 
-    private void onItemRangeMoved(ObservableArrayList<T> sender) {
-        resetItems(sender);
+    private void onItemRangeMoved() {
         notifyDataSetChanged();
     }
 
-    private void onItemRangeRemoved(ObservableArrayList<T> sender, int positionStart, int itemCount) {
-        resetItems(sender);
+    private void onItemRangeRemoved(int positionStart, int itemCount) {
         notifyItemRangeRemoved(positionStart, itemCount);
     }
 

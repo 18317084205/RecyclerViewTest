@@ -22,6 +22,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         jRefreshLayout.setLoadEnabled(true);
 //        CircleImageView circleImageView = new CircleImageView(this, Color.BLUE);
 //        jRefreshLayout.addHeaderView(circleImageView);
+        findViewById(R.id.test).setOnClickListener(this);
         findViewById(R.id.sideBar_view).setOnClickListener(this);
         findViewById(R.id.sideTab_left).setOnClickListener(this);
         findViewById(R.id.sideTab_top).setOnClickListener(this);
@@ -53,6 +54,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.test:
+                startActivity(new Intent(HomeActivity.this, TestActivity.class));
+                break;
             case R.id.sideBar_view:
                 startActivity(new Intent(HomeActivity.this, SideBarActivity.class));
                 break;
@@ -61,7 +65,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.sideTab_top:
                 startActivity(new Intent(HomeActivity.this, SideTabTopActivity.class));
-
                 break;
         }
     }

@@ -17,6 +17,13 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="test" />
+
+            <Button
                 android:id="@+id/sideBar_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,55 +47,67 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
-<ImageView
+                android:src="@mipmap/ic_launcher_round" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
+                android:src="@mipmap/ic_launcher_round" />
 
             <ImageView
                 android:layout_width="wrap_content"

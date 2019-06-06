@@ -67,7 +67,7 @@ public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends
 
     @Override
     public long getItemId(int position) {
-        return getItem(position).hashCode();
+        return position;
     }
 
     @Override
