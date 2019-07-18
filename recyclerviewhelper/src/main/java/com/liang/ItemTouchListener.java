@@ -7,7 +7,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.liang.widget.adapter.BaseAdapter;
+import com.liang.widget.adapter.BaseRecyclerAdapter;
 import com.liang.widget.adapter.LabelRecyclerAdapter;
 import com.liang.widget.listener.OnItemClickListener;
 
@@ -46,9 +46,9 @@ public class ItemTouchListener implements RecyclerView.OnItemTouchListener {
         Log.e("ItemTouchListener", "disallowIntercept: " + disallowIntercept);
     }
 
-    public BaseAdapter getAdapter(RecyclerView view) {
-        if (view.getAdapter() instanceof BaseAdapter) {
-            return (BaseAdapter) view.getAdapter();
+    public BaseRecyclerAdapter getAdapter(RecyclerView view) {
+        if (view.getAdapter() instanceof BaseRecyclerAdapter) {
+            return (BaseRecyclerAdapter) view.getAdapter();
         } else {
             throw new IllegalStateException("A RecyclerView with " +
                     LabelTouchListener.class.getSimpleName() +

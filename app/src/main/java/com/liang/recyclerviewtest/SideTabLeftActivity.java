@@ -14,7 +14,6 @@ import com.liang.recyclerviewtest.bean.SortModel;
 import com.liang.side.Side;
 import com.liang.widget.FloatingLabelDecoration;
 import com.liang.widget.LinearDividerDecoration;
-import com.liang.widget.adapter.BaseAdapter;
 import com.liang.widget.listener.OnItemClickListener;
 
 import java.util.ArrayList;

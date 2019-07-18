@@ -2,16 +2,15 @@ package com.liang.recyclerviewtest.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.liang.recyclerviewtest.R;
-import com.liang.widget.adapter.BaseAdapter;
+import com.liang.widget.adapter.BaseRecyclerAdapter;
 
-public class TabAdapter extends BaseAdapter<String, RecyclerView.ViewHolder> {
+public class TabAdapter extends BaseRecyclerAdapter<String, RecyclerView.ViewHolder> {
 
     private int checkedPosition = -1;
 

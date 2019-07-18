@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+import android.widget.EditText;
 
 import com.liang.recyclerviewtest.adapter.TestAdapter;
 import com.liang.recyclerviewtest.bean.SortModel;
@@ -20,12 +21,14 @@ public class TestActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TestAdapter adapter;
     List<SortModel> sortModels = new ArrayList<>();
+    private EditText edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
         recyclerView = findViewById(R.id.recyclerView);
+        edit = findViewById(R.id.edit_num);
         adapter = new TestAdapter(recyclerView);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL));
         recyclerView.addItemDecoration(new IntervalDecoration(3, 20));
@@ -54,15 +57,19 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void remove(View view) {
-        if (sortModels.size() > 0) {
-            sortModels.remove(0);
+//        if (sortModels.size() > 0) {
+//            sortModels.remove(0);
+//        }
+//        List<SortModel> models = new ArrayList<>();
+//        models.addAll(sortModels);
+        if (!sortModels.isEmpty() && !edit.getText().toString().isEmpty()) {
+            SortModel remove = sortModels.remove(Integer.parseInt(edit.getText().toString()));
+            adapter.remove(remove);
         }
-        List<SortModel> models = new ArrayList<>();
-        models.addAll(sortModels);
-        adapter.reset(models);
+
     }
 
     public void move(View view) {
-
+        adapter.clear();
     }
 }

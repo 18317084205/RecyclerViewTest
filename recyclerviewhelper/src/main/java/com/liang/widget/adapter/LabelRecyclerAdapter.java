@@ -8,7 +8,7 @@ import com.liang.LabelTouchListener;
 import com.liang.widget.LabelDecoration;
 
 public abstract class LabelRecyclerAdapter<T, VH extends RecyclerView.ViewHolder>
-        extends RecyclerViewAdapter<T, VH> implements IDecorationAdapter<VH> {
+        extends BaseRecyclerAdapter<T, VH> implements IDecorationAdapter<VH> {
 
     private OnLabelClickListener mLabelClickListener;
 

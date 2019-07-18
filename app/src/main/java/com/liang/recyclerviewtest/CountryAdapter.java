@@ -20,6 +20,7 @@ import com.liang.side.Side;
 import com.liang.widget.SideBar;
 import com.liang.widget.adapter.DataBindingRelateSideAdapter;
 import com.liang.widget.adapter.RelateSideAdapter;
+import com.liang.widget.holder.DataBindingViewHolder;
 
 import java.security.SecureRandom;
 import java.util.Collection;
